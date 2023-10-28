@@ -1,0 +1,15 @@
+package com.mkj.gist.util;
+
+public enum DMI {
+
+	BUY_TREND_STRAT,
+	BUY_CONTINUE_1,
+	BUY_CONTINUE_2,
+	
+	BUY_TEAND_EXHAUST,
+	CHOPPY,
+	SELL_TREND_STRAT,
+	SELL_CONTINUE,
+	SELL_TREND_EXHAUST
+
+}

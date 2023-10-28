@@ -1,0 +1,34 @@
+Create Following Folder Structure inside c-drive
+c:\
+ |-> gistpro
+       |-> outputcsv
+       |-> inputcsv   (all input csv should be placed inside this folder)
+==========================================================================================================
+
+Input CSV File Configuration 
+------------------------------
+	Change following Class
+	Package 		:	package com.mkj.gist.service
+	Class-Name		:	StockCSVReaderService
+	Method-Name		:	public static CSVReader loadFile(String fileName)
+	Variable-Name	:	String folder = "C:\\gistpro\\inputcsv";
+	
+Output CSV File Configuration
+------------------------------	
+	Change following Class
+	Package 		:	package com.mkj.gist;
+	Class-Name		:	GISTIndicator
+	Method-Name		:	public static void doLoadOnExcel() 
+	Variable-Name	:	String outputFolder = "C:\\gistpro\\outputcsv\\";
+	
+==========================================================================================================
+NOTE: Output CSV file does not contain header information , headers would in the following sequence 
+col1	: 	date 
+col2 	:	Symbol
+col3	:	ClosePrice
+col4	:	Rsi
+col5	:	DaySignal
+col6	:	Open-Price
+col7	:	Close-Price
+col8	:	High-Price
+col9	:	Low-Price

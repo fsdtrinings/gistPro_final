@@ -1,0 +1,105 @@
+Trading Setups
+1) Candle Stick Daily Time Chart
+2) MACD
+3) RSI
+4) ADX
+5) Last one Year Data
+
+
+Signals
+1) BUY , STRONG_BUY
+2) SELL , STRONG_SELL
+3) HOLD
+
+Constrain :- STRONG_BUY always comes after BUY , similarly STRONG_SELL always comes after SELL
+valid DMI 
+ a) Adx > 20 and DMI- > 20 and DMI+ < 14  :- DMI_SELL_Signal = TRUE;
+ b) Adx > 20 and DMI+ > 25 and DMI- < 11  :- DMI_BUY_Signal = TRUE;
+ 		
+	
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+					 Algo Start
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Buy Rules
+=========================
+
+1) When RSI is below 35 :- BUY (Ignore)
+2) When RSI is below 25 :- STRONG_BUY
+3) When MACD Cross Over [identify valid cross over]
+   take 1.5% of Current price (lets say CMP = 1000/=) lets say (threshold = 15/=)
+   whenever histogram is above 0 , start adding the histogram values (lets say total) of next 4 to 6 days 
+   if it crosses (total>= threshold* 0.90) then we consider valid MACD Cross Over.
+    
+    3.a) if RSI is below 35 and Cross_Over = valid -> BUY 
+    3.b) if RSI is in between 40-45 and Cross_Over = valid then check another valid Cross_Over in last 60-90 days
+         if 
+           Current_Cross_Over_Price > Previous_Cross_Over_Price -> BUY
+         
+         3.b.1) During that buy identify RSI three max limits of last one year   
+            lets say (Range 1 :- above 80)
+                     (Range2 :- 75-79)
+                     (Range3 :- 70-74)
+           
+            (stock may have different RSI Range)
+           
+    3.c) if RSI is in between (Range5Below60 to Range3-Range3*0.8) and Histogram > CMP*0.15 -> STONG_BUY
+   
+    
+Sell Rules 
+===================================
+
+    RSI_Hit_Count = 0;
+    rsi_arr[5] ; // when RSI above 65 , store last 5 RSI on daily basis 
+    boolean isRSIDown = false;
+
+1) if isRSIDown == true
+     and RSI_Hit_Count >= 2 : STRONG_SELL;
+    						
+
+
+2) On RSI Range3
+	RSI_Hit_Count++;
+	2.a) if RSI is on and above Range3 and DMI_SELL_SIGNAL = True or Valid_MACD_Cross_Down = True => STRONG_SELL
+	2.b) if RSI is on and above Range3 and DMI_SELL_SIGNAL = False or Valid_MACD_Cross_Down = False and RSI_Hit_Count == 1 => HOLD
+	2.c) if RSI is on and above Range3 and DMI_SELL_SIGNAL = False or Valid_MACD_Cross_Down = False and RSI_Hit_Count == 2 => STRONG_SELL
+	
+	
+3) On RSI Range2
+	RSI_Hit_Count++;
+	2.a) if RSI is on and above Range2 and DMI_SELL_SIGNAL = True or Valid_MACD_Cross_Down = True => STRONG_SELL
+	2.b) if RSI is on and above Range2 and DMI_SELL_SIGNAL = False or Valid_MACD_Cross_Down = False => SELL
+	
+5) On RSI Range1
+	RSI_Hit_Count++;
+	2.a) if RSI is on and above Range1 => STRONG_SELL
+	
+
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+   
+    
+         
+    
+
+    
